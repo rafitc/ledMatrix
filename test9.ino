@@ -88,6 +88,7 @@ void loop()
 
 const char *messages = st.c_str();
 int lengths = (String(st)).length();
+     Serial.println(String(st));
 //Serial.println(lengths);
   //Start print in led matrix 
   led_module.selectFont(FONT);
