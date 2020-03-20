@@ -18,10 +18,11 @@ String m;
 String actual;
 String s;
 
+int b;
 int k=0;
 int i;
 int startMsg,endMsg;
-char msg1[30];
+//char msg1[30];
 
 SoftwareSerial mySerial(3, 2);
 
@@ -68,11 +69,15 @@ void loop(){
       }
     }
    k = endMsg - startMsg;
+   b=0;
     for(i=startMsg; i<=endMsg;i++){
       Serial.print(actual[i]);
+      msg[b++] = actual[i];
     }
+    msg[b++] = '\0';
     }
-  
+    startMsg =0;
+    endMsg=0;
   while(Serial.available())
   {
     m = Serial.readString();
@@ -87,7 +92,7 @@ const char *messages = actual.c_str();
 //Serial.println(lengths);
   //Start print in led matrix 
   led_module.selectFont(FONT);
-  led_module.drawMarquee(messages,k, (32 * ROW), 0);
+  led_module.drawMarquee(msg,b, (32 * ROW), 0);
   long starts = millis();
   long timming = starts;
   boolean flag = false;
